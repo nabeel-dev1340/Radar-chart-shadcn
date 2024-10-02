@@ -1,0 +1,86 @@
+{
+  "September": {
+    "mean": 30.045454545454547,
+    "mean_squared": 935.8636363636364,
+    "variance": 33.13429752066111,
+    "standard_deviation": 5.756239876921488,
+    "modified_mean": 10.962746835616436
+  },
+  "October": {
+    "mean": 28.82608695652174,
+    "mean_squared": 862.2173913043479,
+    "variance": 31.27410207939522,
+    "standard_deviation": 5.592325283761239,
+    "modified_mean": 10.737986209065783
+  },
+  "November": {
+    "mean": 40.142857142857146,
+    "mean_squared": 1748.7142857142858,
+    "variance": 137.2653061224487,
+    "standard_deviation": 11.716027745035802,
+    "modified_mean": 12.671678206592393
+  },
+  "December": {
+    "mean": 53.90909090909091,
+    "mean_squared": 3272.3636363636365,
+    "variance": 366.17355371900885,
+    "standard_deviation": 19.135661831225196,
+    "modified_mean": 14.684562085277301
+  },
+  "January": {
+    "mean": 37.34782608695652,
+    "mean_squared": 1455.7826086956522,
+    "variance": 60.92249527410195,
+    "standard_deviation": 7.805286367206648,
+    "modified_mean": 12.222573556654346
+  },
+  "February": {
+    "mean": 32.65,
+    "mean_squared": 1107.95,
+    "variance": 41.92750000000024,
+    "standard_deviation": 6.475144786026042,
+    "modified_mean": 11.428035701729321
+  },
+  "March": {
+    "mean": 32.31818181818182,
+    "mean_squared": 1075.0454545454545,
+    "variance": 30.580578512396414,
+    "standard_deviation": 5.529970932328344,
+    "modified_mean": 11.369816501277727
+  },
+  "April": {
+    "mean": 34.333333333333336,
+    "mean_squared": 1244.142857142857,
+    "variance": 65.36507936507928,
+    "standard_deviation": 8.084867306584524,
+    "modified_mean": 11.718930554164631
+  },
+  "May": {
+    "mean": 33.34782608695652,
+    "mean_squared": 1139.9565217391305,
+    "variance": 27.879017013232442,
+    "standard_deviation": 5.280058428960085,
+    "modified_mean": 11.549515329563665
+  },
+  "June": {
+    "mean": 33.61904761904762,
+    "mean_squared": 1162.4761904761904,
+    "variance": 32.23582766439881,
+    "standard_deviation": 5.677660404110025,
+    "modified_mean": 11.596386957849866
+  },
+  "July": {
+    "mean": 34.36363636363637,
+    "mean_squared": 1202,
+    "variance": 21.140495867768323,
+    "standard_deviation": 4.597879496873349,
+    "modified_mean": 11.724101051020734
+  },
+  "August": {
+    "mean": 32.63636363636363,
+    "mean_squared": 1091.1818181818182,
+    "variance": 26.04958677685977,
+    "standard_deviation": 5.103879580952099,
+    "modified_mean": 11.42564897699271
+  }
+}
