@@ -3,9 +3,9 @@ import {
   PolarGrid,
   PolarRadiusAxis,
   Radar,
-  RadarChart,
+  RadarChart
 } from "recharts";
-
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -80,48 +80,93 @@ const chartData = [
     mobile: 11.43,
   },
 ];
-
 const chartConfig = {
   desktop: {
-    label: "Desktop",
-    color: "#2A9D90",
+    label: "Standard Deviation",
+    color: "#673ab7",
   },
   mobile: {
-    label: "Mobile",
-    color: "#E76E50",
+    label: "Avg Indexed by Search",
+    color: "#ffa500",
   },
 };
 
+
+const HoverDetails = ({ month, desktop, mobile, isHovering }) => (
+  <div className="self-end bg-white bg-opacity-90 p-2 rounded-md shadow-sm">
+     {isHovering && (
+      <div className="text-[12px] font-medium mb-2">{month}</div>
+    )}
+    <div className="flex items-center mb-2">
+      <div className="w-1 h-6 mr-2" style={{ backgroundColor: chartConfig.desktop.color }}></div>
+      <div className="text-[10px]">{chartConfig.desktop.label}</div>
+      {isHovering && <div className="ml-2 text-[10px] font-semibold">{desktop.toFixed(2)}</div>}
+    </div>
+    <div className="flex items-center">
+      <div className="w-1 h-6 mr-2" style={{ backgroundColor: chartConfig.mobile.color }}></div>
+      <div className="text-[10px]">{chartConfig.mobile.label}</div>
+      {isHovering && <div className="ml-2 text-[10px] font-semibold">{mobile.toFixed(2)}</div>}
+    </div>
+  </div>
+);
+
 export function SeasonalityChart() {
+  const [hoverData, setHoverData] = useState(null);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseMove = (event) => {
+    if (event.activePayload) {
+      setHoverData({
+        month: event.activeLabel,
+        desktop: event.activePayload[0].value,
+        mobile: event.activePayload[1].value,
+      });
+      setIsHovering(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
+
   return (
-    <Card style={{userSelect: "none"}}>
-      <CardContent className="pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <RadarChart data={chartData}>
-            <ChartTooltip
+    <Card style={{userSelect: "none",width: "300px",height:"300px"}}>
+      <div className="flex flex-col p-2 pt-2 gap-2">
+      <HoverDetails
+            month={hoverData?.month}
+            desktop={hoverData?.desktop || 0}
+            mobile={hoverData?.mobile || 0}
+            isHovering={isHovering}
+          />
+        <ChartContainer  config={chartConfig}
+          className="mx-auto aspect-square max-h-[250px] pt-2">
+          <RadarChart 
+            data={chartData} 
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+          >
+             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
+              active={false}
             />
             <PolarAngleAxis dataKey="month" />
             <PolarGrid radialLines={false} />
             <Radar
               dataKey="desktop"
-              fill="var(--color-desktop)"
+              fill={chartConfig.desktop.color}
               fillOpacity={0}
-              stroke="var(--color-desktop)"
+              stroke={chartConfig.desktop.color}
               strokeWidth={2}
             />
             <Radar
               dataKey="mobile"
-              fill="var(--color-mobile)"
+              fill={chartConfig.mobile.color}
               fillOpacity={0}
-              stroke="var(--color-mobile)"
+              stroke={chartConfig.mobile.color}
               strokeWidth={2}
             />
-             <PolarRadiusAxis
+            <PolarRadiusAxis
               angle={75}
               stroke="hsla(var(--foreground))"
               orientation="middle"
@@ -129,7 +174,7 @@ export function SeasonalityChart() {
             />
           </RadarChart>
         </ChartContainer>
-      </CardContent>
+      </div>
     </Card>
   );
 }
