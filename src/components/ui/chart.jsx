@@ -22,7 +22,19 @@ function useChart() {
 }
 
 const ChartContainer = React.forwardRef(
-  ({ id, className, children, config, ...props }, ref) => {
+  (
+    {
+      id,
+      className,
+      children,
+      config,
+      width = "250px",
+      height = "200px",
+      isModal,
+      ...props
+    },
+    ref
+  ) => {
     const uniqueId = React.useId();
     const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`;
 
@@ -31,14 +43,22 @@ const ChartContainer = React.forwardRef(
         <div
           data-chart={chartId}
           ref={ref}
+          style={{
+            width: width,
+            height: height,
+            marginLeft: isModal ? "-45px" : "12px",
+          }}
           className={cn(
-            "w-[250px] h-[200px] flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
+            "flex aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none",
             className
           )}
           {...props}
         >
           <ChartStyle id={chartId} config={config} />
-          <RechartsPrimitive.ResponsiveContainer>
+          <RechartsPrimitive.ResponsiveContainer
+            width={isModal && 850}
+            height={isModal && 500}
+          >
             {children}
           </RechartsPrimitive.ResponsiveContainer>
         </div>
@@ -149,6 +169,7 @@ const ChartTooltipContent = React.forwardRef(
     return (
       <div
         ref={ref}
+        style={{ padding: "5px", borderRadius: "5px" }}
         className={cn(
           "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl",
           className
@@ -210,7 +231,10 @@ const ChartTooltipContent = React.forwardRef(
                         </span>
                       </div>
                       {item.value && (
-                        <span className="font-mono font-medium tabular-nums text-foreground ml-2">
+                        <span
+                          className="font-mono font-medium tabular-nums text-foreground ml-2"
+                          style={{ paddingLeft: "10px" }}
+                        >
                           {item.value.toLocaleString()}
                         </span>
                       )}
